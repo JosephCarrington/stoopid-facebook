@@ -52,13 +52,14 @@ class StoopidFacebook extends WP_Widget
 			echo "<ul class='stoopid_facebook_posts'>";
 				foreach($posts as $post)
 				{
-					if(isset($post->link, $post->message))
+					
+					if(isset($post->message))
 					{
 						?>
 						<li class='stoopid_facebook_post'>
 							
 								
-							<a href='<?php echo $post->link; ?>' title='<?php echo htmlspecialchars($post->message); ?>'><?php echo $post->message; ?></a>
+							<a href='<?php echo isset($post->link) ? $post->link : "http://facebook.com/" . $page_id; ?>' title='<?php echo htmlspecialchars($post->message); ?>'><?php echo $post->message; ?></a>
 
 						</li><!-- .stoopid_facebook_post -->
 					<?php
@@ -84,10 +85,12 @@ class StoopidFacebook extends WP_Widget
 		<p>
 			<label for='<?php echo $this->get_field_id('stoopid_facebook_page_id'); ?>'>Facebook Page ID</label>
 			<input class='widefat' id='<?php echo $this->get_field_id('stoopid_facebook_page_id'); ?>' name='<?php echo $this->get_field_name('stoopid_facebook_page_id'); ?>' type='text' value='<?php echo esc_attr($stoopid_facebook_page_id); ?>' />
+			Go to your page, the ID looks like http://facebook.com/YOUR_PAGE_ID
 		</p>
 		<p>
 			<label for='<?php echo $this->get_field_id('stoopid_facebook_app_id'); ?>'>App ID</label>
 			<input class='widefat' id='<?php echo $this->get_field_id('stoopid_facebook_app_id'); ?>' name='<?php echo $this->get_field_name('stoopid_facebook_app_id'); ?>' type='text' value='<?php echo esc_attr($stoopid_facebook_app_id); ?>' />
+			For this and the secret below, you have to go to http://developers.facebook.com and set up a new App.
 		</p>
 		<p>
 			<label for='<?php echo $this->get_field_id('stoopid_facebook_app_secret'); ?>'>App Secret</label>
